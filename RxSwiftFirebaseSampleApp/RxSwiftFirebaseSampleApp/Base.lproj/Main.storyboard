@@ -61,6 +61,20 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Button"/>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wXV-dE-yxc">
+                                <rect key="frame" x="0.0" y="314" width="414" height="548"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="A9Q-qG-evZ">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A9Q-qG-evZ" id="lrc-2x-Dv9">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-JE-PAX">
                                 <rect key="frame" x="364" y="264" width="52" height="50"/>
                                 <constraints>
@@ -72,6 +86,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="wXV-dE-yxc" firstAttribute="top" secondItem="TQQ-1o-5eW" secondAttribute="bottom" id="1I8-kn-00q"/>
                             <constraint firstItem="js8-C8-zYz" firstAttribute="top" secondItem="etT-lP-Z6o" secondAttribute="bottom" constant="60" id="21H-us-aWd"/>
                             <constraint firstItem="TQQ-1o-5eW" firstAttribute="top" secondItem="OKw-yM-seY" secondAttribute="bottom" constant="60" id="2eU-6g-Fn1"/>
                             <constraint firstItem="etT-lP-Z6o" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2tc-8I-3z7"/>
@@ -80,10 +95,13 @@
                             <constraint firstItem="OKw-yM-seY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LgN-8z-hud"/>
                             <constraint firstItem="6y9-PG-7im" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="NP5-z7-PZi"/>
                             <constraint firstItem="TQQ-1o-5eW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="P1T-o7-oHK"/>
+                            <constraint firstItem="wXV-dE-yxc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="UWn-8y-Wsw"/>
+                            <constraint firstItem="wXV-dE-yxc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W0z-td-Aih"/>
                             <constraint firstItem="etT-lP-Z6o" firstAttribute="leading" secondItem="6y9-PG-7im" secondAttribute="trailing" id="XlU-ka-VnP"/>
                             <constraint firstItem="lYy-JE-PAX" firstAttribute="top" secondItem="js8-C8-zYz" secondAttribute="bottom" constant="60" id="eYO-yf-WQ0"/>
                             <constraint firstItem="etT-lP-Z6o" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kOu-j3-SsP"/>
                             <constraint firstItem="js8-C8-zYz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="kga-qo-PF9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wXV-dE-yxc" secondAttribute="bottom" id="lNS-M2-Dw0"/>
                             <constraint firstItem="js8-C8-zYz" firstAttribute="leading" secondItem="OKw-yM-seY" secondAttribute="trailing" id="mi6-vD-Pc5"/>
                             <constraint firstItem="6y9-PG-7im" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tYR-OD-Vf1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lYy-JE-PAX" secondAttribute="trailing" id="wNe-7E-KYy"/>
@@ -94,6 +112,7 @@
                         <outlet property="downTextField" destination="OKw-yM-seY" id="CxN-Y5-Kko"/>
                         <outlet property="getButton" destination="TQQ-1o-5eW" id="bdt-6b-who"/>
                         <outlet property="realtimeSwich" destination="lYy-JE-PAX" id="8lb-K8-dcS"/>
+                        <outlet property="sampleTableView" destination="wXV-dE-yxc" id="luc-TS-23x"/>
                         <outlet property="setButton" destination="etT-lP-Z6o" id="BMb-PG-we1"/>
                         <outlet property="upTextField" destination="6y9-PG-7im" id="nN8-Hs-KlZ"/>
                     </connections>
