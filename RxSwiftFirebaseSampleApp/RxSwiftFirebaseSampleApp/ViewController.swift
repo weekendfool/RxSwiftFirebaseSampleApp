@@ -24,10 +24,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var sampleTableView: UITableView!
     
     // MARK: - 変数
-    let db = Firestore.firestore()
+//    let db = Firestore.firestore()
     var queriedDataArray = [String()]
     
-    var listener: ListenerRegistration?
+    private var returnText = BehaviorRelay<String>(value: "")
+    
+//    var listener: ListenerRegistration?
+    
+    var viewModel = ViewModel()
     
     private let disposeBag = DisposeBag()
     
@@ -38,18 +42,55 @@ class ViewController: UIViewController {
         
         sampleTableView.delegate = self
         sampleTableView.dataSource = self
+        
+        bind()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        listener?.remove()
+//        listener?.remove()
     }
     
     // MARK: - 関数
 
 
     func bind() {
+        // input
+        setButton.rx.tap.asSignal()
+            .emit(to: viewModel.input.isSetButtonTapped)
+            .disposed(by: disposeBag)
         
+        addButton.rx.tap.asSignal()
+            .emit(to: viewModel.input.isAddButtonTapped)
+            .disposed(by: disposeBag)
+        
+        getButton.rx.tap.asSignal()
+            .emit(to: viewModel.input.isGetButtonTapped)
+            .disposed(by: disposeBag)
+        
+        // realtimeSwichはBoolを返す　→　.rx.valueで伝える
+        realtimeSwich.rx.value.asSignal(onErrorJustReturn: false)
+            .emit(to: viewModel.input.isOnRealtimeSwich)
+            .disposed(by: disposeBag)
+        
+        upTextField.rx.text.orEmpty.asSignal(onErrorSignalWith: .empty())
+            .emit(to: viewModel.input.upTextFieldText)
+            .disposed(by: disposeBag)
+        
+        downTextField.rx.text.orEmpty.asSignal(onErrorSignalWith: .empty())
+            .emit(to: viewModel.input.downTextFieldText)
+            .disposed(by: disposeBag)
+        
+        // output
+        viewModel.output.outputText.asObservable()
+            .bind(to: returnText)
+            .disposed(by: disposeBag)
+        
+       // その他
+        returnText.asObservable().map { [weak self] text in
+            self?.queriedDataArray.append(text)
+        }
+
     }
 }
 
