@@ -17,6 +17,7 @@ target 'RxSwiftFirebaseSampleApp' do
   end
 
 pod 'Firebase/Analytics'
+pod 'Firebase/Firestore'
 pod 'RxCocoa'
 pod 'RxSwift'
 
