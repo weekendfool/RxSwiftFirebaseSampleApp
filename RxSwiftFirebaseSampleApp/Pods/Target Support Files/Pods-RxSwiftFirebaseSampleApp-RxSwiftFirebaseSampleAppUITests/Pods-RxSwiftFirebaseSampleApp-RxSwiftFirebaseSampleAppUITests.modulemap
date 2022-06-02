@@ -1,0 +1,6 @@
+framework module Pods_RxSwiftFirebaseSampleApp_RxSwiftFirebaseSampleAppUITests {
+  umbrella header "Pods-RxSwiftFirebaseSampleApp-RxSwiftFirebaseSampleAppUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
