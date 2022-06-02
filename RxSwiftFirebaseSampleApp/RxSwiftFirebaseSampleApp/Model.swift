@@ -14,6 +14,7 @@ class Model {
     let db = Firestore.firestore()
     
     var queriedDataArray = [String()]
+    var returnText: String = ""
     
     var listener: ListenerRegistration?
     
@@ -46,7 +47,7 @@ class Model {
         }
     }
     
-    func doGetting() {
+    func doGetting() -> String {
         db.collection("sample").getDocuments { querySnapshot, error in
             if let error = error {
                 print("ドキュメントの取得に失敗しました")
@@ -54,15 +55,21 @@ class Model {
                 for document in querySnapshot!.documents {
                     let data = document.data()
                     
-                    guard let text = data["text"] as? String else { return  }
-                    
+                    if let text = data["text"] as? String {
                     self.queriedDataArray.append(text)
+                    
+                    self.returnText = text
+                        
+                    }
                 }
+//                return self.returnText
             }
+//            return self.returnText
         }
+        return self.returnText
     }
     
-    func onRealtimeUpdata() {
+    func onRealtimeUpdata() -> String {
         listener = db.collection("smple").addSnapshotListener { documentSnapshot, error in
             if let error = error {
                 print("ドキュメントの取得に失敗しました：レアルタイムアップデート")
@@ -73,11 +80,14 @@ class Model {
                         let data = document.data()
                         if let text = data["text"] as? String {
                             self.queriedDataArray.append(text)
+                            
+                            self.returnText = text
                         }
                     }
                 }
             }
         }
+        return returnText
     }
     
     

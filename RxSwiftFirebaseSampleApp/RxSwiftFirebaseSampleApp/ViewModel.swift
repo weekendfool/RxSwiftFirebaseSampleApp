@@ -39,6 +39,11 @@ class ViewModel: ViewModelType, ViewModelInput, ViewModelOutput {
     // model
     private var model: Model = Model()
     
+    private var returnText = BehaviorRelay<String>(value: "")
+    
+    private var uptext: String = ""
+    private var dowtext: String = ""
+    
     // MARK: - input
     var isSetButtonTapped = PublishRelay<Void>()
     var isAddButtonTapped = PublishRelay<Void>()
@@ -53,9 +58,42 @@ class ViewModel: ViewModelType, ViewModelInput, ViewModelOutput {
     init() {
         // output
         
-        output =
+        outputText = returnText.map { text in
+            String(text)
+        }
+        .asSignal(onErrorSignalWith: .empty())
+        
         
         // input
+        isSetButtonTapped.map { [weak self] in
+            self?.model.doSetting(text: self?.uptext)
+            
+//            return (self?.model.returnText)!
+        }
+        // 何も購読していないから縛らないし購読破棄も不必要
+//        .bind(to: returnText)
+//        .disposed(by: disposeBag)
+        
+        isAddButtonTapped.map { [weak self] in
+            self?.model.doAdding(text: self?.dowtext)
+        }
+        
+        isGetButtonTapped.map { [weak self] in
+            return (self?.model.doGetting())!
+        }
+        .bind(to: returnText)
+        .disposed(by: disposeBag)
+        
+        isOnRealtimeSwich.map { [weak self] tap in
+            if tap {
+                return (self?.model.onRealtimeUpdata())!
+            } else {
+                self?.model.offRealtimeUpdata()
+                return "offにしたよ"
+            }
+        }
+        .bind(to: returnText)
+        .disposed(by: disposeBag)
     }
     
     
