@@ -44,6 +44,8 @@ class ViewController: UIViewController {
         sampleTableView.dataSource = self
         
         bind()
+        
+//        Model().doSetting(text: "y")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,16 +70,21 @@ class ViewController: UIViewController {
             .emit(to: viewModel.input.isGetButtonTapped)
             .disposed(by: disposeBag)
         
+        // signalは値を保持しない瞬間的なものだからbuttonに向く
         // realtimeSwichはBoolを返す　→　.rx.valueで伝える
         realtimeSwich.rx.value.asSignal(onErrorJustReturn: false)
             .emit(to: viewModel.input.isOnRealtimeSwich)
             .disposed(by: disposeBag)
         
-        upTextField.rx.text.orEmpty.asSignal(onErrorSignalWith: .empty())
+        viewModel.output.outputText
+            .asDriver(onErrorDriveWith: .empty())
+            .drive(sampleTableView.rx.text)
+        
+        upTextField.rx.text.orEmpty.asDriver()
             .emit(to: viewModel.input.upTextFieldText)
             .disposed(by: disposeBag)
         
-        downTextField.rx.text.orEmpty.asSignal(onErrorSignalWith: .empty())
+        downTextField.rx.text.orEmpty.asDriver()
             .emit(to: viewModel.input.downTextFieldText)
             .disposed(by: disposeBag)
         

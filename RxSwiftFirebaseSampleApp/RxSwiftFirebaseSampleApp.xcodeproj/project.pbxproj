@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4393FBC6CBD9E78578712375 /* Pods_RxSwiftFirebaseSampleAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987A168C251FC4E063774DCD /* Pods_RxSwiftFirebaseSampleAppTests.framework */; };
 		604D88A1FE5EED334A37DABC /* Pods_RxSwiftFirebaseSampleApp_RxSwiftFirebaseSampleAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB35A79BD1BE09C0908EC686 /* Pods_RxSwiftFirebaseSampleApp_RxSwiftFirebaseSampleAppUITests.framework */; };
+		8C91B3E2284FBB01001A8E44 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C91B3E1284FBB01001A8E44 /* StoreManager.swift */; };
+		8C91B3E4284FBF68001A8E44 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C91B3E3284FBF68001A8E44 /* TodoModel.swift */; };
+		8C91B3E6284FC03E001A8E44 /* ViewModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C91B3E5284FC03E001A8E44 /* ViewModel2.swift */; };
 		8C926CB9284904F6008512BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C926CB8284904F6008512BC /* AppDelegate.swift */; };
 		8C926CBB284904F6008512BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C926CBA284904F6008512BC /* SceneDelegate.swift */; };
 		8C926CBD284904F6008512BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C926CBC284904F6008512BC /* ViewController.swift */; };
@@ -45,6 +48,9 @@
 /* Begin PBXFileReference section */
 		02A7161DEEEDF5FA01FE6B4D /* Pods-RxSwiftFirebaseSampleApp-RxSwiftFirebaseSampleAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftFirebaseSampleApp-RxSwiftFirebaseSampleAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-RxSwiftFirebaseSampleApp-RxSwiftFirebaseSampleAppUITests/Pods-RxSwiftFirebaseSampleApp-RxSwiftFirebaseSampleAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4704FB70BD62F3BCBD31EF61 /* Pods-RxSwiftFirebaseSampleAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftFirebaseSampleAppTests.release.xcconfig"; path = "Target Support Files/Pods-RxSwiftFirebaseSampleAppTests/Pods-RxSwiftFirebaseSampleAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		8C91B3E1284FBB01001A8E44 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		8C91B3E3284FBF68001A8E44 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
+		8C91B3E5284FC03E001A8E44 /* ViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel2.swift; sourceTree = "<group>"; };
 		8C926CB5284904F6008512BC /* RxSwiftFirebaseSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxSwiftFirebaseSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C926CB8284904F6008512BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C926CBA284904F6008512BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +135,9 @@
 				8C926CBC284904F6008512BC /* ViewController.swift */,
 				8C926CED28492B49008512BC /* ViewModel.swift */,
 				8C926CEF28492B67008512BC /* Model.swift */,
+				8C91B3E5284FC03E001A8E44 /* ViewModel2.swift */,
+				8C91B3E1284FBB01001A8E44 /* StoreManager.swift */,
+				8C91B3E3284FBF68001A8E44 /* TodoModel.swift */,
 				8C926CBE284904F6008512BC /* Main.storyboard */,
 				8C926CC4284904F9008512BC /* Assets.xcassets */,
 				8C926CC6284904F9008512BC /* LaunchScreen.storyboard */,
@@ -420,8 +429,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C926CEE28492B49008512BC /* ViewModel.swift in Sources */,
+				8C91B3E6284FC03E001A8E44 /* ViewModel2.swift in Sources */,
+				8C91B3E4284FBF68001A8E44 /* TodoModel.swift in Sources */,
 				8C926CC3284904F6008512BC /* RxSwiftFirebaseSampleApp.xcdatamodeld in Sources */,
 				8C926CBD284904F6008512BC /* ViewController.swift in Sources */,
+				8C91B3E2284FBB01001A8E44 /* StoreManager.swift in Sources */,
 				8C926CF028492B67008512BC /* Model.swift in Sources */,
 				8C926CB9284904F6008512BC /* AppDelegate.swift in Sources */,
 				8C926CBB284904F6008512BC /* SceneDelegate.swift in Sources */,

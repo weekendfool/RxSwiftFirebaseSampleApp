@@ -16,12 +16,12 @@ protocol ViewModelInput {
     var isGetButtonTapped: PublishRelay<Void> { get }
     var isOnRealtimeSwich: PublishRelay<Bool> { get }
     // textFieldのインプット
-    var upTextFieldText: PublishRelay<String> { get }
-    var downTextFieldText: PublishRelay<String> { get }
+    var upTextFieldText: Driver<String> { get }
+    var downTextFieldText: Driver<String> { get }
 }
 
 protocol ViewModelOutput {
-    var outputText: Signal<String> { get }
+    var outputText: Observable<String> { get }
 }
 
 protocol ViewModelType {
@@ -49,11 +49,11 @@ class ViewModel: ViewModelType, ViewModelInput, ViewModelOutput {
     var isAddButtonTapped = PublishRelay<Void>()
     var isGetButtonTapped = PublishRelay<Void>()
     var isOnRealtimeSwich =  PublishRelay<Bool>()
-    var upTextFieldText = PublishRelay<String>()
-    var downTextFieldText =  PublishRelay<String>()
+    var upTextFieldText = Driver<String>()
+    var downTextFieldText =  Driver<String>()
     
     // MARK: - output
-    var outputText: Signal<String>
+    var outputText: Observable<String>
     
     init() {
         // output
@@ -61,22 +61,26 @@ class ViewModel: ViewModelType, ViewModelInput, ViewModelOutput {
         outputText = returnText.map { text in
             String(text)
         }
-        .asSignal(onErrorSignalWith: .empty())
+        
         
         
         // input
         isSetButtonTapped.map { [weak self] in
+            print("self?.uptext: \(self?.uptext)")
             self?.model.doSetting(text: self?.uptext)
             
-//            return (self?.model.returnText)!
+            return (self?.model.returnText)!
         }
-        // 何も購読していないから縛らないし購読破棄も不必要
-//        .bind(to: returnText)
-//        .disposed(by: disposeBag)
+        .bind(to: returnText)
+        .disposed(by: disposeBag)
         
         isAddButtonTapped.map { [weak self] in
             self?.model.doAdding(text: self?.dowtext)
+            
+            return (self?.model.returnText)!
         }
+        .bind(to: returnText)
+        .disposed(by: disposeBag)
         
         isGetButtonTapped.map { [weak self] in
             return (self?.model.doGetting())!
@@ -94,6 +98,16 @@ class ViewModel: ViewModelType, ViewModelInput, ViewModelOutput {
         }
         .bind(to: returnText)
         .disposed(by: disposeBag)
+        
+        
+        upTextFieldText.map { [weak self] in
+            self?.uptext = $0
+            print("text:\($0)")
+        }
+        
+        downTextFieldText.map { [weak self] text in
+            self?.dowtext = text
+        }
     }
     
     
