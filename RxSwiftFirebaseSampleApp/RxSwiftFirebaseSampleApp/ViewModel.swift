@@ -1,114 +1,44 @@
 //
-//  ViewModel.swift
+//  ViewModel2.swift
 //  RxSwiftFirebaseSampleApp
 //
-//  Created by Oh!ara on 2022/06/03.
+//  Created by Oh!ara on 2022/06/08.
 //
 
 import Foundation
-import RxCocoa
 import RxSwift
-
-protocol ViewModelInput {
-    // buttonのインプット
-    var isSetButtonTapped: PublishRelay<Void> { get }
-    var isAddButtonTapped: PublishRelay<Void> { get }
-    var isGetButtonTapped: PublishRelay<Void> { get }
-    var isOnRealtimeSwich: PublishRelay<Bool> { get }
-    // textFieldのインプット
-    var upTextFieldText: Driver<String> { get }
-    var downTextFieldText: Driver<String> { get }
-}
-
-protocol ViewModelOutput {
-    var outputText: Observable<String> { get }
-}
+import RxCocoa
 
 protocol ViewModelType {
-    var input: ViewModelInput { get }
-    var output: ViewModelOutput { get }
+    associatedtype Input
+    associatedtype Output
+    
+    func transform(input: Input) -> Output
 }
 
-class ViewModel: ViewModelType, ViewModelInput, ViewModelOutput {
+class ViewModel {
+    private let disposeBag: DisposeBag = DisposeBag()
     
-    var input: ViewModelInput { return self }
-    var output: ViewModelOutput { return self }
+}
+
+extension ViewModel: ViewModelType {
     
-    private var disposeBag = DisposeBag()
-    
-    // model
-    private var model: Model = Model()
-    
-    private var returnText = BehaviorRelay<String>(value: "")
-    
-    private var uptext: String = ""
-    private var dowtext: String = ""
-    
-    // MARK: - input
-    var isSetButtonTapped = PublishRelay<Void>()
-    var isAddButtonTapped = PublishRelay<Void>()
-    var isGetButtonTapped = PublishRelay<Void>()
-    var isOnRealtimeSwich =  PublishRelay<Bool>()
-    var upTextFieldText = Driver<String>()
-    var downTextFieldText =  Driver<String>()
-    
-    // MARK: - output
-    var outputText: Observable<String>
-    
-    init() {
-        // output
+    struct Input {
+        let emailText: Driver<String>
+        let passwordText: Driver<String>
+        let nameText: Driver<String>
         
-        outputText = returnText.map { text in
-            String(text)
-        }
-        
-        
-        
-        // input
-        isSetButtonTapped.map { [weak self] in
-            print("self?.uptext: \(self?.uptext)")
-            self?.model.doSetting(text: self?.uptext)
-            
-            return (self?.model.returnText)!
-        }
-        .bind(to: returnText)
-        .disposed(by: disposeBag)
-        
-        isAddButtonTapped.map { [weak self] in
-            self?.model.doAdding(text: self?.dowtext)
-            
-            return (self?.model.returnText)!
-        }
-        .bind(to: returnText)
-        .disposed(by: disposeBag)
-        
-        isGetButtonTapped.map { [weak self] in
-            return (self?.model.doGetting())!
-        }
-        .bind(to: returnText)
-        .disposed(by: disposeBag)
-        
-        isOnRealtimeSwich.map { [weak self] tap in
-            if tap {
-                return (self?.model.onRealtimeUpdata())!
-            } else {
-                self?.model.offRealtimeUpdata()
-                return "offにしたよ"
-            }
-        }
-        .bind(to: returnText)
-        .disposed(by: disposeBag)
-        
-        
-        upTextFieldText.map { [weak self] in
-            self?.uptext = $0
-            print("text:\($0)")
-        }
-        
-        downTextFieldText.map { [weak self] text in
-            self?.dowtext = text
-        }
+        let tapRegisterButton: Signal<Void>
     }
     
+    struct Output {
+        let resultText: Driver<String>
+        
+        
+    }
     
+    func transform(input: Input) -> Output {
+        
+        return Output(resultText: <#T##Observable<String>#>)
+    }
 }

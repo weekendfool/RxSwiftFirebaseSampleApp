@@ -15,23 +15,18 @@ class ViewController: UIViewController {
 
     
     // MARK: - ui
-    @IBOutlet weak var setButton: UIButton!
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var getButton: UIButton!
-    @IBOutlet weak var realtimeSwich: UISwitch!
-    @IBOutlet weak var upTextField: UITextField!
-    @IBOutlet weak var downTextField: UITextField!
-    @IBOutlet weak var sampleTableView: UITableView!
     
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var registerButton: UIButton!
+    
+    @IBOutlet weak var loginEmailTextField: UITextField!
+    @IBOutlet weak var loginPasswordfield: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     // MARK: - 変数
-//    let db = Firestore.firestore()
-    var queriedDataArray = [String()]
-    
-    private var returnText = BehaviorRelay<String>(value: "")
-    
-//    var listener: ListenerRegistration?
-    
-    var viewModel = ViewModel()
+
+    private var viewModel = ViewModel()
     
     private let disposeBag = DisposeBag()
     
@@ -40,84 +35,24 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        sampleTableView.delegate = self
-        sampleTableView.dataSource = self
-        
-        bind()
-        
-//        Model().doSetting(text: "y")
+
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        listener?.remove()
-    }
+
     
     // MARK: - 関数
 
 
     func bind() {
-        // input
-        setButton.rx.tap.asSignal()
-            .emit(to: viewModel.input.isSetButtonTapped)
-            .disposed(by: disposeBag)
+        let input = ViewModel.Input(
+            emailText: emailTextField.rx.text.orEmpty.asDriver(),
+            passwordText: passwordTextField.rx.text.orEmpty.asDriver(),
+            nameText: nameTextField.rx.text.orEmpty.asDriver(),
+            tapRegisterButton: registerButton.rx.tap.asSignal()
+        )
         
-        addButton.rx.tap.asSignal()
-            .emit(to: viewModel.input.isAddButtonTapped)
-            .disposed(by: disposeBag)
-        
-        getButton.rx.tap.asSignal()
-            .emit(to: viewModel.input.isGetButtonTapped)
-            .disposed(by: disposeBag)
-        
-        // signalは値を保持しない瞬間的なものだからbuttonに向く
-        // realtimeSwichはBoolを返す　→　.rx.valueで伝える
-        realtimeSwich.rx.value.asSignal(onErrorJustReturn: false)
-            .emit(to: viewModel.input.isOnRealtimeSwich)
-            .disposed(by: disposeBag)
-        
-        viewModel.output.outputText
-            .asDriver(onErrorDriveWith: .empty())
-            .drive(sampleTableView.rx.text)
-        
-        upTextField.rx.text.orEmpty.asDriver()
-            .emit(to: viewModel.input.upTextFieldText)
-            .disposed(by: disposeBag)
-        
-        downTextField.rx.text.orEmpty.asDriver()
-            .emit(to: viewModel.input.downTextFieldText)
-            .disposed(by: disposeBag)
-        
-        // output
-        viewModel.output.outputText.asObservable()
-            .bind(to: returnText)
-            .disposed(by: disposeBag)
-        
-       // その他
-        returnText.asObservable().map { [weak self] text in
-            self?.queriedDataArray.append(text)
-        }
-
+        let output = viewModel.transform(input: input)
     }
-}
-
-extension ViewController: UITableViewDelegate {
-    
-}
-
-extension ViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return queriedDataArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = sampleTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel?.text = queriedDataArray[indexPath.row]
-        
-        return cell
-    }
-    
     
 }
 
