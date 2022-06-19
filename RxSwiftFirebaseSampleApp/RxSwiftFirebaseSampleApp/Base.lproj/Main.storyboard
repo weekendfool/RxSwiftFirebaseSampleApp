@@ -66,6 +66,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="登録"/>
+                                <connections>
+                                    <action selector="tapButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DOv-gl-i7E"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLP-Qs-dRT">
                                 <rect key="frame" x="158" y="604" width="98" height="40"/>

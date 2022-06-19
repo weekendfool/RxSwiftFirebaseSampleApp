@@ -35,13 +35,44 @@ extension ViewModel: ViewModelType {
     
     struct Output {
         let result: Driver<Bool>
-        
+        let x: Signal<Bool>
         
     }
     
     func transform(input: Input) -> Output {
         
+        let x = input.tapRegisterButton.map { _ -> Bool in
+            Auth.auth().createUser(withEmail: "tokutai.sei.5102@gmail.com", password: "password2") { result, error in
+                if let user = result?.user {
+                    print("ユーザー登録完了2 uid: \(user.uid) ")
+                    Firestore.firestore().collection("users").document(user.uid).setData([
+                        "name": "dare"
+                    ]) { error in
+                        if let error = error {
+                            print("==============================")
+                            print("ユーザー登録失敗2")
+                            
+//                            resultBool = false
+                        } else {
+                            print("----------------------------------------")
+                            print("ユーザー作成完了2")
+                            
+//                            resultBool = true
+                        }
+                    }
+                } else if let error = error {
+                    print("===============================")
+                    print("新規登録失敗2")
+                    
+//                    resultBool = false
+                }
+                
+            }
+            return true
+        }
+        
         let result = Driver<Bool>.zip(input.emailText, input.passwordText, input.nameText) { email, password, name in
+            
             
             // MARK: - model化する
             var resultBool: Bool = false
@@ -74,6 +105,8 @@ extension ViewModel: ViewModelType {
             return resultBool
         }
         
-        return Output(result: result)
-    }
+        return Output(result: result, x: x)
+
 }
+    }
+

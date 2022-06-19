@@ -10,6 +10,7 @@ import RxCocoa
 import RxSwift
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 class ViewController: UIViewController {
 
@@ -52,7 +53,39 @@ class ViewController: UIViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+//        output.result.asObservable().bind(to: loginPasswordfield.rx.text)
+        output.x.emit().disposed(by: disposeBag)
+
     }
     
+    @IBAction func tapButtonAction(_ sender: Any) {
+//        Auth.auth().createUser(withEmail: "tokutai.sei.5102@gmail.com", password: "password3") { result, error in
+//            if let user = result?.user {
+//                print("ユーザー登録完了3 uid: \(user.uid) ")
+//                Firestore.firestore().collection("users").document(user.uid).setData([
+//                    "name": "dare"
+//                ]) { error in
+//                    if let error = error {
+//                        print("==============================")
+//                        print("ユーザー登録失敗3")
+//
+////                            resultBool = false
+//                    } else {
+//                        print("----------------------------------------")
+//                        print("ユーザー作成完了3")
+//
+////                            resultBool = true
+//                    }
+//                }
+//            } else if let error = error {
+//                print("===============================")
+//                print("新規登録失敗3")
+//
+////                    resultBool = false
+//            }
+//
+//        }
+    }
 }
 
