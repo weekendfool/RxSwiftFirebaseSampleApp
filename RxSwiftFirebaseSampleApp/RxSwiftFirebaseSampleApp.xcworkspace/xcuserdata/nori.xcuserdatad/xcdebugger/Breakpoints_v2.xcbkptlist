@@ -14,8 +14,8 @@
             filePath = "RxSwiftFirebaseSampleApp/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "transform(input:)"
             landmarkType = "9">
          </BreakpointContent>

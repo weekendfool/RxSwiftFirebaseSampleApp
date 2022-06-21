@@ -36,6 +36,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         bind()
+        
+//        registerButton.isHidden = true
 
     }
     
@@ -56,7 +58,27 @@ class ViewController: UIViewController {
         
 //        output.result.asObservable().bind(to: loginPasswordfield.rx.text)
         output.x.emit().disposed(by: disposeBag)
-
+        
+//        output.isEnableSinin.drive().disposed(by: disposeBag)
+        
+        output.result.drive().disposed(by: disposeBag)
+        
+        output.isEnableSinin
+            .map { [weak self] bool in
+                if bool {
+                    print(1)
+                    self?.registerButton.isEnabled = true
+//                    self?.registerButton.isHidden = false
+                } else {
+                    print(2)
+                    self?.registerButton.isEnabled = false
+//                    self?.registerButton.isHidden = true
+                }
+            }
+            .drive()
+            .disposed(by: disposeBag)
+        
+    
     }
     
     @IBAction func tapButtonAction(_ sender: Any) {

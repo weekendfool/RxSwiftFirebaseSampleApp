@@ -36,6 +36,7 @@ extension ViewModel: ViewModelType {
     struct Output {
         let result: Driver<Bool>
         let x: Signal<Bool>
+        let isEnableSinin: Driver<Bool>
         
     }
     
@@ -71,6 +72,26 @@ extension ViewModel: ViewModelType {
             return true
         }
         
+        let isEnableSinin = Driver<Bool>.zip(input.emailText, input.passwordText, input.nameText) { email, password, name in
+            
+            if email != "" && password != "" && name != "" {
+                print("-----------------------")
+                print("true")
+                return true
+            } else {
+                print("=========================")
+                print("false")
+                return false
+            }
+        }
+        
+//        Driver<Bool>.zip(input.emailText, input.passwordText, input.nameText, isEnableSinin) { email, password, name, isEnableSinin in
+//            if isEnableSinin {
+//
+//            }
+//
+//        }
+//
         let result = Driver<Bool>.zip(input.emailText, input.passwordText, input.nameText) { email, password, name in
             
             
@@ -105,7 +126,7 @@ extension ViewModel: ViewModelType {
             return resultBool
         }
         
-        return Output(result: result, x: x)
+        return Output(result: result, x: x, isEnableSinin: isEnableSinin)
 
 }
     }
