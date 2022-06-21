@@ -51,13 +51,14 @@ class ViewController: UIViewController {
             emailText: emailTextField.rx.text.orEmpty.asDriver(),
             passwordText: passwordTextField.rx.text.orEmpty.asDriver(),
             nameText: nameTextField.rx.text.orEmpty.asDriver(),
-            tapRegisterButton: registerButton.rx.tap.asSignal()
+            tapRegisterButton: registerButton.rx.tap.asSignal(),
+            tapRegisterButton2: registerButton.rx.tap.asDriver()
         )
         
         let output = viewModel.transform(input: input)
         
 //        output.result.asObservable().bind(to: loginPasswordfield.rx.text)
-        output.x.emit().disposed(by: disposeBag)
+//        output.x.emit().disposed(by: disposeBag)
         
 //        output.isEnableSinin.drive().disposed(by: disposeBag)
         
@@ -77,6 +78,8 @@ class ViewController: UIViewController {
             }
             .drive()
             .disposed(by: disposeBag)
+        
+//        output.result.drive(output.isEnableSinin)
         
     
     }
