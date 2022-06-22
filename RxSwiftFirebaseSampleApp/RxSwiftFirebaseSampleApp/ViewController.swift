@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
+    
     // MARK: - ライフサイクル
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,19 @@ class ViewController: UIViewController {
 //        output.isEnableSinin.drive().disposed(by: disposeBag)
         
         output.result.drive().disposed(by: disposeBag)
+        output.result
+            .map { [weak self] result in
+                if result {
+                    let dialog = UIAlertController(title: "新規登録成功", message: "", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "ok", style: .cancel)
+                    dialog.addAction(action)
+                    
+                    self?.present(dialog, animated: true)
+                    
+                }
+            }
+            .drive()
+            .disposed(by: disposeBag)
         
         output.isEnableSinin
             .map { [weak self] bool in
