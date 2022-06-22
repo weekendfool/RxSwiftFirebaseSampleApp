@@ -52,6 +52,7 @@ extension ViewModel: ViewModelType {
        
         
         let result = input.tapRegisterButton.map { _ -> Bool in
+            var bool = false
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
                 if let user = result?.user {
                     print("ユーザー登録完了2 uid: \(user.uid) ")
@@ -61,9 +62,11 @@ extension ViewModel: ViewModelType {
                         if let error = error {
                             print("==============================")
                             print("ユーザー登録失敗2")
+                            bool = false
                         } else {
                             print("----------------------------------------")
                             print("ユーザー作成完了2")
+                            bool = true
                         }
                     }
                 } else if let error = error {
@@ -71,7 +74,7 @@ extension ViewModel: ViewModelType {
                     print("新規登録失敗2")
                 }
             }
-            return true
+            return bool
         }.asDriver(onErrorDriveWith: .empty())
        
         let isEnableSinin = Driver<Bool>.combineLatest(input.emailText, input.passwordText, input.nameText) { emailText, passwordText, nameText in
