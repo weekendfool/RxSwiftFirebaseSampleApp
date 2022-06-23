@@ -32,6 +32,7 @@ class ViewController: UIViewController {
 
     private var viewModel = ViewModel()
     private var viewModel2 = ViewModel2()
+    private var viewModel3 = ViewModel3()
     
     private let disposeBag = DisposeBag()
     
@@ -45,6 +46,8 @@ class ViewController: UIViewController {
 //        registerButton.isHidden = true
         
         bind2()
+        
+        bind3()
 
     }
     
@@ -139,6 +142,28 @@ class ViewController: UIViewController {
             }
             .drive()
             .disposed(by: disposeBag)
+    }
+    
+    func bind3() {
+        let input = ViewModel3.Input3(tappedButton: loginButton.rx.tap.asSignal())
+        
+        let output = viewModel3.transform(input: input)
+        
+        output.loginBool
+            .map { [weak self] bool in
+                if bool {
+                    self?.statuesLabel.text = "ログイン"
+                } else {
+                    self?.statuesLabel.text = "ログアウト"
+                }
+            }
+            .drive()
+            .disposed(by: disposeBag)
+        
+        output.nameString
+            .drive(userNameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
     }
     
     @IBAction func tapButtonAction(_ sender: Any) {
