@@ -25,6 +25,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var loginEmailTextField: UITextField!
     @IBOutlet weak var loginPasswordfield: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var statuesLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     // MARK: - 変数
 
     private var viewModel = ViewModel()

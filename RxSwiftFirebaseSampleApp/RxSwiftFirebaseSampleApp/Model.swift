@@ -64,6 +64,38 @@ class Model {
         }
     }
     
+    func searchUserName() -> Observable<String> {
+        return Observable.create { observer in
+            if let user = Auth.auth().currentUser {
+                Firestore.firestore().collection("users").document(user.uid).getDocument { (snapshot, error) in
+                    if let snap = snapshot {
+                        if let data = snap.data() {
+                            let name = data["name"] as! String
+                            observer.onNext(name)
+                        }
+                    } else if let error = error {
+                        print("ユーザー名取得失敗")
+                        observer.onNext("取得失敗")
+                    }
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func searchLogin() -> Observable<Bool> {
+        return Observable.create { observer in
+            if let user = Auth.auth().currentUser {
+                print("ログイン中")
+                observer.onNext(true)
+            } else {
+                print("ログインしてないよ")
+                observer.onNext(false)
+            }
+            return Disposables.create()
+        }
+        
+    }
     
     
     

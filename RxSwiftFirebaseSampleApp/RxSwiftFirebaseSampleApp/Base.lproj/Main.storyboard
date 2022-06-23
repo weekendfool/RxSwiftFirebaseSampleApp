@@ -79,6 +79,24 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="ログイン"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="状態" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4i-R0-435">
+                                <rect key="frame" x="0.0" y="394" width="207" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="207" id="X3K-Zc-VVg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raX-Uj-vcZ">
+                                <rect key="frame" x="207" y="394" width="207" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="207" id="9dE-Kq-04q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,17 +108,23 @@
                             <constraint firstItem="pRW-ou-iGX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5vN-yK-OaQ"/>
                             <constraint firstItem="vaN-pR-ara" firstAttribute="top" secondItem="tkd-kd-VPI" secondAttribute="bottom" constant="40" id="68U-PX-dgw"/>
                             <constraint firstItem="tkd-kd-VPI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8MY-iB-dg9"/>
+                            <constraint firstItem="k4i-R0-435" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="B9h-dE-D4y"/>
                             <constraint firstItem="vaN-pR-ara" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="R6i-R6-de8"/>
+                            <constraint firstItem="raX-Uj-vcZ" firstAttribute="leading" secondItem="k4i-R0-435" secondAttribute="trailing" id="R6x-Ih-Sgm"/>
                             <constraint firstItem="hjj-8S-XyJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="S5C-He-FM9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Tn-nX-6Kd" secondAttribute="trailing" constant="158" id="SUE-1c-y3l"/>
+                            <constraint firstItem="raX-Uj-vcZ" firstAttribute="leading" secondItem="k4i-R0-435" secondAttribute="trailing" id="TUb-Qh-iyF"/>
                             <constraint firstItem="tkd-kd-VPI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="X5e-Zd-Fuc"/>
                             <constraint firstItem="pRW-ou-iGX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZDE-uQ-5zy"/>
+                            <constraint firstItem="raX-Uj-vcZ" firstAttribute="top" secondItem="6Tn-nX-6Kd" secondAttribute="bottom" constant="50" id="ZKK-0H-9cS"/>
+                            <constraint firstItem="k4i-R0-435" firstAttribute="top" secondItem="6Tn-nX-6Kd" secondAttribute="bottom" constant="50" id="a3A-jG-82L"/>
                             <constraint firstItem="jLP-Qs-dRT" firstAttribute="top" secondItem="pRW-ou-iGX" secondAttribute="bottom" constant="40" id="bGz-lZ-qAm"/>
                             <constraint firstItem="6Tn-nX-6Kd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="158" id="dwO-DE-4ZO"/>
                             <constraint firstItem="tkd-kd-VPI" firstAttribute="top" secondItem="hjj-8S-XyJ" secondAttribute="bottom" constant="40" id="g91-Q6-Nhp"/>
                             <constraint firstItem="suG-5h-JDZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gFJ-8S-Nki"/>
                             <constraint firstItem="suG-5h-JDZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="giX-Xp-zrg"/>
                             <constraint firstItem="pRW-ou-iGX" firstAttribute="top" secondItem="suG-5h-JDZ" secondAttribute="bottom" constant="40" id="hCO-TF-i4G"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="raX-Uj-vcZ" secondAttribute="trailing" id="pWd-hr-JQU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jLP-Qs-dRT" secondAttribute="trailing" constant="158" id="qTy-ML-5PX"/>
                             <constraint firstItem="hjj-8S-XyJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vKW-in-hVM"/>
                             <constraint firstItem="suG-5h-JDZ" firstAttribute="top" secondItem="vaN-pR-ara" secondAttribute="bottom" constant="200" id="zMq-g3-5gT"/>
@@ -114,6 +138,8 @@
                         <outlet property="nameTextField" destination="vaN-pR-ara" id="zk2-2o-yyp"/>
                         <outlet property="passwordTextField" destination="tkd-kd-VPI" id="5Ha-wR-ym5"/>
                         <outlet property="registerButton" destination="6Tn-nX-6Kd" id="qAl-aT-4Gg"/>
+                        <outlet property="statuesLabel" destination="k4i-R0-435" id="gNq-bM-9QV"/>
+                        <outlet property="userNameLabel" destination="raX-Uj-vcZ" id="8pg-gS-2gy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
