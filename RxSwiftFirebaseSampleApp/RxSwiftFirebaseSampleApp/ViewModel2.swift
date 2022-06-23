@@ -20,6 +20,7 @@ protocol ViewModel2Type {
 
 class ViewModel2 {
     private let disposeBag: DisposeBag = DisposeBag()
+    private let model: Model = Model()
 }
 
 
@@ -52,24 +53,30 @@ extension ViewModel2: ViewModel2Type {
             }
         }
         
+        let result = input.tappedLoginButton.asObservable().map { _ -> Observable<Bool> in
+            return self.model.login(email: email, pass: password)
+        }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
         
-        let result = input.tappedLoginButton.map { _ -> Bool in
-//            var bool = false
-            Auth.auth().signIn(withEmail: email, password: password) { (result , error) in
-                print("##")
-                if let user = result?.user {
-                    print("ログイン完了")
-//                    return true
-                } else if let error = error {
-                    print("ログイン失敗")
-//                    return false
-                }
-//                return true
-            }
-//            print("bool: \(bool)")
-            return true
-        }.asDriver(onErrorDriveWith: .empty())
         
+//        let result = input.tappedLoginButton.map { _ -> Bool in
+////            var bool = false
+//            Auth.auth().signIn(withEmail: email, password: password) { (result , error) in
+//                print("##")
+//                if let user = result?.user {
+//                    print("ログイン完了")
+////                    return true
+//                } else if let error = error {
+//                    print("ログイン失敗")
+////                    return false
+//                }
+////                return true
+//            }
+////            print("bool: \(bool)")
+//            return true
+//        }.asDriver(onErrorDriveWith: .empty())
+//
         return Output2(result: result, isEnableLogin: isEnableLogin)
     }
     
