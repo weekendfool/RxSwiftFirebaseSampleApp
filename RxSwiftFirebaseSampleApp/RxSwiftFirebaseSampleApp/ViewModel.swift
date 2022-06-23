@@ -44,42 +44,57 @@ extension ViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         
-       
+//        let result: PublishSubject<Bool> = PublishSubject<Bool>()
         
         var name: String = ""
         var email: String = ""
         var password: String = ""
         
-        let result2 = input.tapRegisterButton.map { _ -> Observable<Bool> in
-            return self.model.signinFirebase(email: email, pass: password, name: name)
-        }.asDriver(onErrorDriveWith: .empty())
-
-        
-        let result = input.tapRegisterButton.map { _ -> Bool in
-            var bool = false
-            Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                if let user = result?.user {
-                    print("ユーザー登録完了2 uid: \(user.uid) ")
-                    Firestore.firestore().collection("users").document(user.uid).setData([
-                        "name": name
-                    ]) { error in
-                        if let error = error {
-                            print("==============================")
-                            print("ユーザー登録失敗2")
-                            bool = false
-                        } else {
-                            print("----------------------------------------")
-                            print("ユーザー作成完了2")
-                            bool = true
-                        }
-                    }
-                } else if let error = error {
-                    print("===============================")
-                    print("新規登録失敗2")
-                }
+        //Observable<Observable<Bool>> を　Observable<Bool>に変更するために .merge() つける
+        let result = input.tapRegisterButton.asObservable()
+            .map { _ -> Observable<Bool> in
+                return self.model.signinFirebase(email: email, pass: password, name: name)
             }
-            return bool
-        }.asDriver(onErrorDriveWith: .empty())
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+    
+
+//        let x = self.model.signinFirebase(email: email, pass: password, name: name)
+//
+//        x.subscribe { data in
+//
+//            print("data: \(data)")
+//        }
+//
+//
+//
+//
+       
+//        let result = input.tapRegisterButton.map { _ -> Bool in
+//            var bool = false
+//            Auth.auth().createUser(withEmail: email, password: password) { result, error in
+//                if let user = result?.user {
+//                    print("ユーザー登録完了2 uid: \(user.uid) ")
+//                    Firestore.firestore().collection("users").document(user.uid).setData([
+//                        "name": name
+//                    ]) { error in
+//                        if let error = error {
+//                            print("==============================")
+//                            print("ユーザー登録失敗2")
+//                            bool = false
+//                        } else {
+//                            print("----------------------------------------")
+//                            print("ユーザー作成完了2")
+//                            bool = true
+//                        }
+//                    }
+//                } else if let error = error {
+//                    print("===============================")
+//                    print("新規登録失敗2")
+//                }
+//            }
+//            return bool
+//        }.asDriver(onErrorDriveWith: .empty())
        
         let isEnableSinin = Driver<Bool>.combineLatest(input.emailText, input.passwordText, input.nameText) { emailText, passwordText, nameText in
             

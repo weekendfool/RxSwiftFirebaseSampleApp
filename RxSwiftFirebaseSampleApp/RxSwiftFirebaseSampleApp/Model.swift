@@ -18,7 +18,7 @@ import RxCocoa
 class Model {
     
     func signinFirebase(email: String, pass: String, name: String) -> Observable<Bool> {
-        var bool = false
+//        var bool = false
         
         return Observable.create { observer in
             Auth.auth().createUser(withEmail: email, password: pass) { result, error in
@@ -39,7 +39,7 @@ class Model {
                     }
                 } else if let error = error {
                     print("===============================")
-                    print("新規登録失敗2")
+                    print("新規登録失敗")
                     observer.onNext(false)
                 }
             }
@@ -68,6 +68,7 @@ class Model {
 //            } else if let error = error {
 //                print("===============================")
 //                print("新規登録失敗2")
+//                bool =
 //            }
 //        }
 //        return bool
