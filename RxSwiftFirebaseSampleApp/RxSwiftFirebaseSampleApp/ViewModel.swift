@@ -20,6 +20,7 @@ protocol ViewModelType {
 
 class ViewModel {
     private let disposeBag: DisposeBag = DisposeBag()
+    private let model = Model()
     
 }
 
@@ -49,7 +50,10 @@ extension ViewModel: ViewModelType {
         var email: String = ""
         var password: String = ""
         
-       
+        let result2 = input.tapRegisterButton.map { _ -> Observable<Bool> in
+            return self.model.signinFirebase(email: email, pass: password, name: name)
+        }.asDriver(onErrorDriveWith: .empty())
+
         
         let result = input.tapRegisterButton.map { _ -> Bool in
             var bool = false

@@ -28,6 +28,7 @@ class ViewController: UIViewController {
     // MARK: - 変数
 
     private var viewModel = ViewModel()
+    private var viewModel2 = ViewModel2()
     
     private let disposeBag = DisposeBag()
     
@@ -39,6 +40,8 @@ class ViewController: UIViewController {
         bind()
         
 //        registerButton.isHidden = true
+        
+        bind2()
 
     }
     
@@ -63,9 +66,10 @@ class ViewController: UIViewController {
         
 //        output.isEnableSinin.drive().disposed(by: disposeBag)
         
-        output.result.drive().disposed(by: disposeBag)
+//        output.result.drive().disposed(by: disposeBag)
         output.result
             .map { [weak self] result in
+                print("##")
                 if result {
                     let dialog = UIAlertController(title: "新規登録成功", message: "", preferredStyle: .alert)
                     let action = UIAlertAction(title: "ok", style: .cancel)
@@ -95,7 +99,43 @@ class ViewController: UIViewController {
         
 //        output.result.drive(output.isEnableSinin)
         
+    }
     
+    func bind2() {
+        let input = ViewModel2.Input2(
+            loginEmailText: loginEmailTextField.rx.text.orEmpty.asDriver(),
+            loginPasswordText: loginPasswordfield.rx.text.orEmpty.asDriver(),
+            tappedLoginButton: loginButton.rx.tap.asSignal()
+        )
+        
+        let output = viewModel2.transform(input: input)
+        
+        output.isEnableLogin
+            .map { [weak self] bool in
+                if bool {
+                    self?.loginButton.isEnabled = true
+                } else {
+                    self?.loginButton.isEnabled = false
+                }
+            }
+            .drive()
+            .disposed(by: disposeBag)
+        
+        output.result
+//            .debug("result: \(result)")
+            .map { [weak self] result in
+                print("result: \(result)")
+                if result {
+                    let dialog = UIAlertController(title: "ログイン成功", message: "", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "good", style: .cancel)
+                    dialog.addAction(action)
+                    
+                    self?.present(dialog, animated: true)
+                    
+                }
+            }
+            .drive()
+            .disposed(by: disposeBag)
     }
     
     @IBAction func tapButtonAction(_ sender: Any) {

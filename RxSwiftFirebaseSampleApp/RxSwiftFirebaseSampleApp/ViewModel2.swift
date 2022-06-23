@@ -54,17 +54,20 @@ extension ViewModel2: ViewModel2Type {
         
         
         let result = input.tappedLoginButton.map { _ -> Bool in
-            var bool = false
+//            var bool = false
             Auth.auth().signIn(withEmail: email, password: password) { (result , error) in
+                print("##")
                 if let user = result?.user {
                     print("ログイン完了")
-                    bool = true
+//                    return true
                 } else if let error = error {
                     print("ログイン失敗")
-                    bool = false
+//                    return false
                 }
+//                return true
             }
-            return bool
+//            print("bool: \(bool)")
+            return true
         }.asDriver(onErrorDriveWith: .empty())
         
         return Output2(result: result, isEnableLogin: isEnableLogin)
