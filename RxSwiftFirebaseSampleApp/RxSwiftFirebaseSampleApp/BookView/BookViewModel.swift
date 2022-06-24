@@ -37,9 +37,12 @@ extension BookViewModel: BookViewModelType {
     func transform(input: Input) -> Output {
         
         var title: String = ""
+        
         input.title.map { text in
+            print("title: \(text)")
             title = text
-        }
+        }.drive()
+            .disposed(by: disposebag)
         
         let result = input.tappedAddButton.asObservable()
             .map { _ -> Observable<Bool> in

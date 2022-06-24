@@ -29,6 +29,8 @@ class BookViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        bind()
     }
     
     // MARK: - 関数
