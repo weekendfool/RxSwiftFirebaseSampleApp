@@ -114,6 +114,31 @@ class Model {
         }
     }
     
+    func addData(title: String) -> Observable<Bool> {
+        
+            return Observable.create { observer in
+                // ログイン済みかの確認
+                if let user = Auth.auth().currentUser {
+                    // firebaseにデータを作成する
+                    let createdTime = FieldValue.serverTimestamp()
+                    
+                Firestore.firestore().collection("users/\(user.uid)/books").document().setData(
+                    ["title": title,
+                     "createdAt": createdTime
+                    ],merge: true) { error in
+                        if let error = error {
+                            print("データの作成失敗")
+                            observer.onNext(false)
+                        } else {
+                            print("データの作成成功")
+                            observer.onNext(true)
+                        }
+                    }
+            }
+            return Disposables.create()
+        }
+    }
+    
     
     
 }
