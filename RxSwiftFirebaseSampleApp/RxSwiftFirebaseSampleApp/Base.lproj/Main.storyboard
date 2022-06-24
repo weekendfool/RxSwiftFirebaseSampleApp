@@ -152,11 +152,20 @@
                         <outlet property="registerButton" destination="6Tn-nX-6Kd" id="qAl-aT-4Gg"/>
                         <outlet property="statuesLabel" destination="k4i-R0-435" id="gNq-bM-9QV"/>
                         <outlet property="userNameLabel" destination="raX-Uj-vcZ" id="8pg-gS-2gy"/>
+                        <segue destination="WDe-Xg-gYM" kind="presentation" identifier="goBookView" modalPresentationStyle="fullScreen" id="w3i-NF-MVT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44.927536231884062" y="83.705357142857139"/>
+            <point key="canvasLocation" x="-38" y="119"/>
+        </scene>
+        <!--BookView-->
+        <scene sceneID="Whl-5M-u61">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="BookView" storyboardName="BookView" id="WDe-Xg-gYM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Te5-mf-LOx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="937" y="119"/>
         </scene>
     </scenes>
 </document>

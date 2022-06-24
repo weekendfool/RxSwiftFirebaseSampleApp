@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     private var viewModel4 = ViewModel4()
     
     private let disposeBag = DisposeBag()
-    
+
     
     // MARK: - ライフサイクル
     override func viewDidLoad() {
@@ -139,7 +139,9 @@ class ViewController: UIViewController {
                 print("result: \(result)")
                 if result {
                     let dialog = UIAlertController(title: "ログイン成功", message: "", preferredStyle: .alert)
-                    let action = UIAlertAction(title: "good", style: .cancel)
+                    let action = UIAlertAction(title: "good", style: .default) { action in
+                        self?.performSegue(withIdentifier: "goBookView", sender: nil)
+                    }
                     dialog.addAction(action)
                     
                     self?.present(dialog, animated: true)
