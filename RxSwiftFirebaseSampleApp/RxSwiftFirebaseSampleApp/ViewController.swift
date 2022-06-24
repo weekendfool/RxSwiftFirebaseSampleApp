@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     private var viewModel = ViewModel()
     private var viewModel2 = ViewModel2()
     private var viewModel3 = ViewModel3()
+    private var viewModel4 = ViewModel4()
     
     private let disposeBag = DisposeBag()
     
@@ -51,6 +52,8 @@ class ViewController: UIViewController {
         bind2()
         
         bind3()
+        
+        bind4()
 
     }
     
@@ -153,6 +156,7 @@ class ViewController: UIViewController {
         let output = viewModel3.transform(input: input)
         
         output.loginBool
+            .debug("起動")
             .map { [weak self] bool in
                 if bool {
                     self?.statuesLabel.text = "ログイン"
@@ -167,6 +171,23 @@ class ViewController: UIViewController {
             .drive(userNameLabel.rx.text)
             .disposed(by: disposeBag)
         
+    }
+    
+    func bind4() {
+        let input = ViewModel4.Input4(tapLogoutButton: logoutButton.rx.tap.asSignal())
+        
+        let output = viewModel4.transform(input: input)
+        
+        output.isLogoutEnabled
+            .map { [weak self] bool in
+                if bool {
+                    self?.statuesLabel.text = "ログアウト"
+                } else {
+                    self?.statuesLabel.text = "ログイン"
+                }
+            }
+            .drive()
+            .disposed(by: disposeBag)
     }
     
     @IBAction func tapButtonAction(_ sender: Any) {
