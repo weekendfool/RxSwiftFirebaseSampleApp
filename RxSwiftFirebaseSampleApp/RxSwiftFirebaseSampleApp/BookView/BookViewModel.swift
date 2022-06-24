@@ -27,11 +27,13 @@ extension BookViewModel: BookViewModelType {
     
     struct Input {
         let tappedAddButton: Signal<Void>
+        let tappedGetButton: Signal<Void>
         let title: Driver<String>
     }
     
     struct Output {
         let result: Driver<Bool>
+        let text: Driver<String>
     }
     
     func transform(input: Input) -> Output {
@@ -50,6 +52,14 @@ extension BookViewModel: BookViewModelType {
             }.merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        return Output(result: result)
+        let text = input.tappedGetButton.asObservable()
+            .map { _ -> Observable<String> in
+                print("title1: \(title)")
+                return self.model.getData(title: title)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        return Output(result: result, text: text)
     }
 }

@@ -140,5 +140,33 @@ class Model {
     }
     
     
+    func getData(title: String) -> Observable<String> {
+        print("title2: \(title)")
+        return Observable.create { observer in
+            if let  user = Auth.auth().currentUser {
+                Firestore.firestore()
+                    .collection("users/\(user.uid)/books")
+                    .addSnapshotListener { (querySnapshot, error) in
+                        if let querySnapshot = querySnapshot {
+                            print("取得成功")
+                            var returnTitle = ""
+                            for x in querySnapshot.documents {
+                                let data = x.data()
+                                returnTitle = data["title"] as? String ?? "なぜ"
+                            }
+//                            returnTitle = data["title"] as! String
+                            print("returnTitle: \(returnTitle)")
+                            observer.onNext(returnTitle)
+        
+                        } else if let error = error {
+                        print("取得失敗")
+                        observer.onNext("取得失敗")
+                        }
+                    }
+            }
+            return Disposables.create()
+        }
+    }
+    
     
 }

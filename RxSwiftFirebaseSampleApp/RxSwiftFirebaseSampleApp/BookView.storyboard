@@ -25,12 +25,12 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Button"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygp-16-IRG">
-                                <rect key="frame" x="100" y="44" width="314" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygp-16-IRG">
+                                <rect key="frame" x="100" y="44" width="214" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="6rL-cf-1SO"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -56,15 +56,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOP-U7-RqK">
+                                <rect key="frame" x="314" y="44" width="100" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0f0-oy-mPA"/>
+                                    <constraint firstAttribute="width" constant="100" id="10I-Yi-6NY"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="get"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBrownColor"/>
                         <constraints>
                             <constraint firstItem="zaq-Wd-keM" firstAttribute="top" secondItem="mDd-5r-qPd" secondAttribute="bottom" id="L2D-ai-fZE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="zaq-Wd-keM" secondAttribute="bottom" id="NLI-Di-tsR"/>
+                            <constraint firstItem="DOP-U7-RqK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="RdV-GN-F8L"/>
                             <constraint firstItem="gGw-b2-at3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="TTp-ah-yDz"/>
-                            <constraint firstItem="ygp-16-IRG" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Tfj-t1-Hab"/>
                             <constraint firstItem="ygp-16-IRG" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="W3o-dq-hUx"/>
+                            <constraint firstItem="DOP-U7-RqK" firstAttribute="leading" secondItem="ygp-16-IRG" secondAttribute="trailing" id="WAk-u7-g9h"/>
                             <constraint firstItem="ygp-16-IRG" firstAttribute="leading" secondItem="gGw-b2-at3" secondAttribute="trailing" id="ZQX-p5-EG4"/>
                             <constraint firstItem="mDd-5r-qPd" firstAttribute="top" secondItem="gGw-b2-at3" secondAttribute="bottom" id="be6-o1-f3F"/>
                             <constraint firstItem="mDd-5r-qPd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="eAV-M4-9Rf"/>
@@ -72,9 +82,11 @@
                             <constraint firstItem="gGw-b2-at3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gZO-Lg-kRd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mDd-5r-qPd" secondAttribute="trailing" id="hrk-rv-rFl"/>
                             <constraint firstItem="zaq-Wd-keM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sfn-dm-WCx"/>
+                            <constraint firstItem="DOP-U7-RqK" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="sgD-94-gzY"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="getButton" destination="DOP-U7-RqK" id="jhv-Kf-2Wa"/>
                         <outlet property="sampleButton" destination="gGw-b2-at3" id="Kly-A2-UgR"/>
                         <outlet property="sampleLabel" destination="ygp-16-IRG" id="Yqv-PE-IEG"/>
                         <outlet property="sampleTableView" destination="zaq-Wd-keM" id="pvi-Fy-tOw"/>

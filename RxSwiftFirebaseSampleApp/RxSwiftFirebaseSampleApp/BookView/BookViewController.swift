@@ -17,6 +17,7 @@ class BookViewController: UIViewController {
     @IBOutlet weak var sampleLabel: UILabel!
     @IBOutlet weak var sampleTableView: UITableView!
     @IBOutlet weak var sampleTextField: UITextField!
+    @IBOutlet weak var getButton: UIButton!
     
     // MARK: - 変数
     private let disposeBog: DisposeBag = DisposeBag()
@@ -38,6 +39,7 @@ class BookViewController: UIViewController {
     func bind() {
         let input = BookViewModel.Input(
             tappedAddButton: sampleButton.rx.tap.asSignal(),
+            tappedGetButton: getButton.rx.tap.asSignal(),
             title: sampleTextField.rx.text.orEmpty.asDriver()
         )
         
@@ -51,6 +53,12 @@ class BookViewController: UIViewController {
             }
         }
         .drive()
+        .disposed(by: disposeBog)
+        
+        output.text.map { text in
+            return text
+        }
+        .drive(sampleLabel.rx.text)
         .disposed(by: disposeBog)
     }
 
