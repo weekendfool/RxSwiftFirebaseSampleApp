@@ -21,6 +21,8 @@ class BookViewController: UIViewController {
     // MARK: - 変数
     private let disposeBog: DisposeBag = DisposeBag()
     
+    private let bookViewModel: BookViewModel = BookViewModel()
+    
     
     // MARK: - ライフサイクル
     override func viewDidLoad() {
@@ -30,6 +32,25 @@ class BookViewController: UIViewController {
     }
     
     // MARK: - 関数
+    
+    func bind() {
+        let input = BookViewModel.Input(
+            tappedAddButton: sampleButton.rx.tap.asSignal(),
+            title: sampleTextField.rx.text.orEmpty.asDriver()
+        )
+        
+        let output = bookViewModel.transform(input: input)
+        
+        output.result.map { [weak self] bool in
+            if bool {
+                self?.sampleLabel.text = "成功"
+            } else {
+                self?.sampleLabel.text = "失敗"
+            }
+        }
+        .drive()
+        .disposed(by: disposeBog)
+    }
 
     
     
