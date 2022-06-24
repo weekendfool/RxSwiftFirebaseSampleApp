@@ -94,7 +94,24 @@ class Model {
             }
             return Disposables.create()
         }
+    }
+    
+    func logout() -> Observable<Bool> {
         
+        return Observable.create { observer in
+            if Auth.auth().currentUser != nil {
+                // ログアウト処理
+                do {
+                    try Auth.auth().signOut()
+                    print("ログアウト完了")
+                    observer.onNext(true)
+                } catch let error as NSError {
+                    print("ログアウト")
+                    observer.onNext(false)
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     

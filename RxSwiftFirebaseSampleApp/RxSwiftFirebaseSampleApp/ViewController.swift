@@ -28,6 +28,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var statuesLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
+    
+    @IBOutlet weak var logoutButton: UIButton!
+    
     // MARK: - 変数
 
     private var viewModel = ViewModel()
